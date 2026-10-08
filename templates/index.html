@@ -2,34 +2,36 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1,
+maximum-scale=1,
+user-scalable=no">
+
 <title>UZBEK RP</title>
 
 <style>
+
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-    user-select:none;
-    -webkit-user-select:none;
-    touch-action:none;
 }
 
 html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#78a957;
-    font-family:Arial,sans-serif;
+    background:#75a852;
 }
 
-#game{
+canvas{
     position:fixed;
     left:0;
     top:0;
     width:100%;
     height:100%;
-    display:block;
 }
 
 #top{
@@ -38,220 +40,62 @@ html,body{
     left:0;
     right:0;
     height:58px;
-    background:rgba(8,12,9,.94);
+
+    background:#10150f;
+
     color:white;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 14px;
+
+    padding:0 15px;
+
+    font-family:Arial;
     z-index:10;
 }
 
 #logo{
     font-size:20px;
-    font-weight:900;
-}
-
-.stats{
-    display:flex;
-    gap:7px;
-}
-
-.stat{
-    background:#252c25;
-    border-radius:10px;
-    padding:8px 10px;
-    font-size:13px;
     font-weight:bold;
+}
+
+.info{
+    display:flex;
+    gap:8px;
+}
+
+.box{
+    background:#292e28;
+    padding:8px 10px;
+    border-radius:10px;
+    font-weight:bold;
+    font-size:13px;
 }
 
 #m{
     position:fixed;
-    left:14px;
+
     top:70px;
+    left:15px;
+
     width:58px;
     height:58px;
+
     border-radius:50%;
+
     border:4px solid white;
+
     background:#222;
+
     color:white;
+
     font-size:25px;
-    font-weight:900;
-    z-index:20;
-}
-
-#joystick{
-    position:fixed;
-    left:20px;
-    bottom:18px;
-    width:140px;
-    height:140px;
-    border-radius:50%;
-    background:rgba(30,60,20,.5);
-    border:3px solid rgba(255,255,255,.35);
-    z-index:20;
-}
-
-#stick{
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:64px;
-    height:64px;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    background:#d5d9d2;
-    border:4px solid white;
-    box-shadow:0 5px 15px #0008;
-}
-
-#controls{
-    position:fixed;
-    right:15px;
-    bottom:18px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    z-index:20;
-}
-
-.ctrl{
-    width:110px;
-    height:58px;
-    border:0;
-    border-radius:17px;
-    color:white;
-    font-size:17px;
-    font-weight:900;
-    box-shadow:0 5px 12px #0006;
-}
-
-#gas{
-    background:#18ad4b;
-}
-
-#brake{
-    background:#ed3434;
-}
-
-#exit{
-    background:#ed8b19;
-    display:none;
-}
-
-#enter{
-    position:fixed;
-    right:15px;
-    bottom:18px;
-    width:125px;
-    height:58px;
-    border:0;
-    border-radius:17px;
-    background:#18ad4b;
-    color:white;
-    font-size:16px;
-    font-weight:900;
-    z-index:20;
-    display:none;
-}
-
-#speed{
-    position:fixed;
-    top:70px;
-    right:12px;
-    background:#111c;
-    color:white;
-    padding:8px 12px;
-    border-radius:10px;
     font-weight:bold;
-    z-index:10;
-    display:none;
+
+    z-index:20;
 }
 
-#menu{
-    position:fixed;
-    inset:0;
-    background:#000b;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:100;
-}
-
-.menuBox{
-    width:300px;
-    padding:22px;
-    border-radius:22px;
-    background:#202420;
-}
-
-.menuTitle{
-    color:white;
-    text-align:center;
-    font-size:25px;
-    font-weight:900;
-    margin-bottom:15px;
-}
-
-.menuButton{
-    width:100%;
-    height:52px;
-    margin-top:9px;
-    border:0;
-    border-radius:13px;
-    background:#383d38;
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-}
-
-#close{
-    background:#b92f2f;
-}
-
-#msg{
-    position:fixed;
-    left:50%;
-    top:70%;
-    transform:translate(-50%,-50%);
-    background:#000c;
-    color:white;
-    padding:12px 18px;
-    border-radius:12px;
-    font-weight:bold;
-    opacity:0;
-    z-index:200;
-    transition:.2s;
-}
-
-@media(max-width:700px){
-    #top{height:50px}
-    #logo{font-size:16px}
-    .stat{font-size:11px;padding:6px}
-    #m{top:62px;width:52px;height:52px}
-    #joystick{
-        width:125px;
-        height:125px;
-        left:15px;
-        bottom:14px;
-    }
-    #stick{
-        width:58px;
-        height:58px;
-    }
-    #controls{
-        right:12px;
-        bottom:14px;
-    }
-    .ctrl{
-        width:100px;
-        height:55px;
-    }
-    #enter{
-        right:12px;
-        bottom:14px;
-    }
-}
 </style>
 </head>
 
@@ -260,109 +104,976 @@ html,body{
 <canvas id="game"></canvas>
 
 <div id="top">
-    <div id="logo">🇺🇿 UZBEK RP</div>
 
-    <div class="stats">
-        <div class="stat">💰 <span id="money">500000</span> so‘m</div>
-        <div class="stat">⛽ <span id="fuel">97</span>%</div>
+    <div id="logo">
+        🇺🇿 UZBEK RP
     </div>
+
+    <div class="info">
+
+        <div class="box">
+            💰 500000 so‘m
+        </div>
+
+        <div class="box">
+            ⛽ 97%
+        </div>
+
+    </div>
+
 </div>
 
 <button id="m">M</button>
 
-<div id="speed">0 km/h</div>
-
-<div id="joystick">
-    <div id="stick"></div>
-</div>
-
-<div id="controls">
-    <button id="exit" class="ctrl">TUSHISH</button>
-    <button id="gas" class="ctrl">GAZ</button>
-    <button id="brake" class="ctrl">TORMOZ</button>
-</div>
-
-<button id="enter">O‘TIRISH</button>
-
-<div id="msg"></div>
-
-<div id="menu">
-    <div class="menuBox">
-        <div class="menuTitle">🇺🇿 UZBEK RP</div>
-        <button class="menuButton">🗺️ XARITA</button>
-        <button class="menuButton">⚙️ SOZLAMALAR</button>
-        <button id="close" class="menuButton">❌ YOPISH</button>
-    </div>
-</div>
 
 <script>
 
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const canvas =
+document.getElementById("game");
 
-let W = 0;
-let H = 0;
+const ctx =
+canvas.getContext("2d");
 
-function resize(){
-    W = window.innerWidth;
-    H = window.innerHeight;
 
-    canvas.width = W;
-    canvas.height = H;
-}
+/* EKRAN */
 
-window.addEventListener("resize",resize);
-resize();
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-/* =========================
-   DUNYO
-========================= */
 
-const WORLD_W = 3000;
-const WORLD_H = 2200;
+/* DUNYO */
 
-let car = {
-    x:1500,
-    y:1100,
-    angle:0,
-    speed:0
-};
+const W = 2400;
+const H = 1800;
 
-let player = {
-    x:1570,
-    y:1100,
-    angle:0
-};
 
-let inCar = false;
-let fuel = 97;
-let money = 500000;
+/* KAMERA */
 
-/* =========================
-   JOYSTICK
-========================= */
+let cameraX = 0;
+let cameraY = 0;
 
-const joystick = document.getElementById("joystick");
-const stick = document.getElementById("stick");
 
-let joyX = 0;
-let joyY = 0;
-let touching = false;
+/* ==================================================
+   YER
+================================================== */
 
-function moveStick(x,y){
+ctx.fillStyle = "#72a552";
 
-    const r = joystick.getBoundingClientRect();
+ctx.fillRect(
+    0,
+    0,
+    W,
+    H
+);
 
-    let dx = x - (r.left+r.width/2);
-    let dy = y - (r.top+r.height/2);
 
-    const max = 45;
+/* ==================================================
+   YO'L
+================================================== */
 
-    let len = Math.sqrt(dx*dx+dy*dy);
+function road(x,y,w,h){
 
-    if(len > max){
-        dx = dx/len*max;
-        dy = dy/len*max;
+    /* trotuar */
+
+    ctx.fillStyle="#b5aa95";
+
+    ctx.fillRect(
+        x-12,
+        y-12,
+        w+24,
+        h+24
+    );
+
+
+    /* asfalt */
+
+    ctx.fillStyle="#303438";
+
+    ctx.fillRect(
+        x,
+        y,
+        w,
+        h
+    );
+
+
+    /* yo'l chizig'i */
+
+    ctx.strokeStyle="#e8d36b";
+
+    ctx.lineWidth=5;
+
+    ctx.setLineDash([
+        35,
+        25
+    ]);
+
+    ctx.beginPath();
+
+    if(w>h){
+
+        ctx.moveTo(
+            x,
+            y+h/2
+        );
+
+        ctx.lineTo(
+            x+w,
+            y+h/2
+        );
+
+    }else{
+
+        ctx.moveTo(
+            x+w/2,
+            y
+        );
+
+        ctx.lineTo(
+            x+w/2,
+            y+h
+        );
+
     }
 
-    joyX
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+}
+
+
+/* asosiy yo'llar */
+
+road(
+    0,
+    650,
+    W,
+    230
+);
+
+road(
+    1050,
+    0,
+    230,
+    H
+);
+
+road(
+    300,
+    1150,
+    1700,
+    130
+);
+
+
+/* ==================================================
+   BINO
+================================================== */
+
+function building(
+    x,
+    y,
+    w,
+    h,
+    name
+){
+
+    /* soya */
+
+    ctx.fillStyle="#0004";
+
+    ctx.fillRect(
+        x+12,
+        y+12,
+        w,
+        h
+    );
+
+
+    /* bino */
+
+    ctx.fillStyle="#c8b18e";
+
+    ctx.fillRect(
+        x,
+        y,
+        w,
+        h
+    );
+
+
+    /* tom */
+
+    ctx.fillStyle="#594e42";
+
+    ctx.fillRect(
+        x-5,
+        y-12,
+        w+10,
+        14
+    );
+
+
+    /* oynalar */
+
+    for(
+        let xx=x+25;
+        xx<x+w-30;
+        xx+=65
+    ){
+
+        for(
+            let yy=y+30;
+            yy<y+h-50;
+            yy+=60
+        ){
+
+            ctx.fillStyle="#284657";
+
+            ctx.fillRect(
+                xx,
+                yy,
+                35,
+                38
+            );
+
+            ctx.strokeStyle="#ddd";
+
+            ctx.strokeRect(
+                xx,
+                yy,
+                35,
+                38
+            );
+        }
+    }
+
+
+    /* eshik */
+
+    ctx.fillStyle="#513728";
+
+    ctx.fillRect(
+        x+w/2-25,
+        y+h-75,
+        50,
+        75
+    );
+
+
+    /* nomi */
+
+    ctx.fillStyle="white";
+
+    ctx.font="bold 20px Arial";
+
+    ctx.textAlign="center";
+
+    ctx.fillText(
+        name,
+        x+w/2,
+        y+h-85
+    );
+}
+
+
+/* binolar */
+
+building(
+    100,
+    100,
+    350,
+    300,
+    "BANK"
+);
+
+building(
+    530,
+    100,
+    300,
+    260,
+    "DO'KON"
+);
+
+building(
+    900,
+    100,
+    280,
+    300,
+    "KAFE"
+);
+
+building(
+    1450,
+    100,
+    400,
+    300,
+    "SHIFOXONA"
+);
+
+building(
+    1950,
+    100,
+    330,
+    300,
+    "POLITSIYA"
+);
+
+building(
+    100,
+    950,
+    350,
+    220,
+    "OFIS"
+);
+
+building(
+    520,
+    950,
+    330,
+    220,
+    "MAHALLA"
+);
+
+building(
+    1450,
+    950,
+    350,
+    250,
+    "AVTOSALON"
+);
+
+building(
+    1900,
+    950,
+    400,
+    260,
+    "SERVIS"
+);
+
+
+/* ==================================================
+   DARAxt
+================================================== */
+
+function tree(x,y){
+
+    /* soya */
+
+    ctx.fillStyle="#0003";
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        x,
+        y+30,
+        32,
+        10,
+        0,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    /* tana */
+
+    ctx.fillStyle="#70452a";
+
+    ctx.fillRect(
+        x-7,
+        y,
+        14,
+        40
+    );
+
+
+    /* barg */
+
+    ctx.fillStyle="#2f7d3b";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        32,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.fillStyle="#3d9448";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x-18,
+        y-5,
+        20,
+        0,
+        Math.PI*2
+    );
+
+    ctx.arc(
+        x+18,
+        y-5,
+        20,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+}
+
+
+/* daraxtlar */
+
+tree(70,500);
+tree(500,500);
+tree(900,500);
+tree(1500,500);
+tree(2100,500);
+
+tree(70,900);
+tree(500,900);
+tree(900,900);
+tree(1500,900);
+tree(2200,900);
+
+tree(100,1400);
+tree(500,1400);
+tree(1000,1450);
+tree(1700,1400);
+tree(2200,1450);
+
+
+/* ==================================================
+   MASHINA
+================================================== */
+
+function car(
+    x,
+    y
+){
+
+    ctx.save();
+
+    ctx.translate(x,y);
+
+
+    /* soya */
+
+    ctx.fillStyle="#0005";
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        0,
+        12,
+        50,
+        28,
+        0,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    /* g'ildiraklar */
+
+    ctx.fillStyle="#111";
+
+    ctx.fillRect(
+        -38,
+        -32,
+        15,
+        28
+    );
+
+    ctx.fillRect(
+        23,
+        -32,
+        15,
+        28
+    );
+
+    ctx.fillRect(
+        -38,
+        5,
+        15,
+        28
+    );
+
+    ctx.fillRect(
+        23,
+        5,
+        15,
+        28
+    );
+
+
+    /* mashina kuzovi */
+
+    ctx.fillStyle="#1976d2";
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        -32,
+        -48,
+        64,
+        96,
+        15
+    );
+
+    ctx.fill();
+
+
+    /* oynalar */
+
+    ctx.fillStyle="#183244";
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        -23,
+        -30,
+        46,
+        55,
+        10
+    );
+
+    ctx.fill();
+
+
+    /* oyna chizig'i */
+
+    ctx.strokeStyle="#78b9dc";
+
+    ctx.lineWidth=2;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -23,
+        0
+    );
+
+    ctx.lineTo(
+        23,
+        0
+    );
+
+    ctx.stroke();
+
+
+    /* faralar */
+
+    ctx.fillStyle="#fff1a8";
+
+    ctx.fillRect(
+        -22,
+        -45,
+        15,
+        8
+    );
+
+    ctx.fillRect(
+        7,
+        -45,
+        15,
+        8
+    );
+
+
+    /* stop */
+
+    ctx.fillStyle="#e22";
+
+    ctx.fillRect(
+        -22,
+        36,
+        15,
+        7
+    );
+
+    ctx.fillRect(
+        7,
+        36,
+        15,
+        7
+    );
+
+
+    /* nomer */
+
+    ctx.fillStyle="white";
+
+    ctx.fillRect(
+        -14,
+        28,
+        28,
+        8
+    );
+
+
+    ctx.restore();
+}
+
+
+/* ==================================================
+   ODAM
+================================================== */
+
+function person(
+    x,
+    y
+){
+
+    ctx.save();
+
+    ctx.translate(x,y);
+
+
+    /* soya */
+
+    ctx.fillStyle="#0004";
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        0,
+        28,
+        20,
+        8,
+        0,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    /* oyoq */
+
+    ctx.strokeStyle="#202838";
+
+    ctx.lineWidth=8;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -5,
+        8
+    );
+
+    ctx.lineTo(
+        -9,
+        28
+    );
+
+    ctx.moveTo(
+        5,
+        8
+    );
+
+    ctx.lineTo(
+        9,
+        28
+    );
+
+    ctx.stroke();
+
+
+    /* tana */
+
+    ctx.fillStyle="#ed7927";
+
+    ctx.fillRect(
+        -14,
+        -10,
+        28,
+        28
+    );
+
+
+    /* bosh */
+
+    ctx.fillStyle="#d79a6c";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        0,
+        -22,
+        12,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    /* soch */
+
+    ctx.fillStyle="#222";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        0,
+        -26,
+        11,
+        Math.PI,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.restore();
+}
+
+
+/* ==================================================
+   GAZ ZAPRAWKA
+================================================== */
+
+function gasStation(x,y){
+
+    ctx.fillStyle="#eeeeee";
+
+    ctx.fillRect(
+        x,
+        y,
+        180,
+        110
+    );
+
+
+    ctx.fillStyle="#d71920";
+
+    ctx.fillRect(
+        x,
+        y,
+        180,
+        25
+    );
+
+
+    ctx.fillStyle="white";
+
+    ctx.font="bold 16px Arial";
+
+    ctx.fillText(
+        "UZ OIL",
+        x+12,
+        y+18
+    );
+
+
+    for(
+        let i=0;
+        i<3;
+        i++
+    ){
+
+        ctx.fillStyle="#222";
+
+        ctx.fillRect(
+            x+30+i*45,
+            y+45,
+            20,
+            45
+        );
+    }
+}
+
+
+gasStation(
+    820,
+    520
+);
+
+gasStation(
+    1600,
+    520
+);
+
+gasStation(
+    2200,
+    600
+);
+
+
+/* ==================================================
+   MASHINA VA ODAM
+================================================== */
+
+car(
+    1150,
+    765
+);
+
+person(
+    1250,
+    765
+);
+
+
+/* ==================================================
+   KAMERA
+================================================== */
+
+cameraX =
+1150 - canvas.width/2;
+
+cameraY =
+765 - canvas.height/2;
+
+
+/* EKRANGA CHIQARISH */
+
+function render(){
+
+    ctx.setTransform(
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+    );
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    ctx.translate(
+        -cameraX,
+        -cameraY
+    );
+
+    /* yana yer */
+
+    ctx.fillStyle="#72a552";
+
+    ctx.fillRect(
+        0,
+        0,
+        W,
+        H
+    );
+
+    /* yo'llar */
+
+    road(
+        0,
+        650,
+        W,
+        230
+    );
+
+    road(
+        1050,
+        0,
+        230,
+        H
+    );
+
+    road(
+        300,
+        1150,
+        1700,
+        130
+    );
+
+    /* binolar */
+
+    building(100,100,350,300,"BANK");
+    building(530,100,300,260,"DO'KON");
+    building(900,100,280,300,"KAFE");
+    building(1450,100,400,300,"SHIFOXONA");
+    building(1950,100,330,300,"POLITSIYA");
+
+    building(100,950,350,220,"OFIS");
+    building(520,950,330,220,"MAHALLA");
+    building(1450,950,350,250,"AVTOSALON");
+    building(1900,950,400,260,"SERVIS");
+
+    /* zapravkalar */
+
+    gasStation(820,520);
+    gasStation(1600,520);
+    gasStation(2200,600);
+
+    /* daraxtlar */
+
+    tree(70,500);
+    tree(500,500);
+    tree(900,500);
+    tree(1500,500);
+    tree(2100,500);
+
+    tree(70,900);
+    tree(500,900);
+    tree(900,900);
+    tree(1500,900);
+    tree(2200,900);
+
+    /* mashina */
+
+    car(1150,765);
+
+    /* odam */
+
+    person(1250,765);
+}
+
+render();
+
+
+/* ekran o'zgarsa */
+
+window.addEventListener(
+    "resize",
+    function(){
+
+        canvas.width =
+            window.innerWidth;
+
+        canvas.height =
+            window.innerHeight;
+
+        cameraX =
+            1150-canvas.width/2;
+
+        cameraY =
+            765-canvas.height/2;
+
+        render();
+    }
+);
+
+
+/* M */
+
+document.getElementById("m").onclick=function(){
+
+    alert(
+        "UZBEK RP\n\nXARITA\nSOZLAMALAR"
+    );
+};
+
+</script>
+
+</body>
+</html>
