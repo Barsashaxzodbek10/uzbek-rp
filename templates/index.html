@@ -4,10 +4,8 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1,
-maximum-scale=1,
-user-scalable=no">
+content="width=device-width,initial-scale=1,
+maximum-scale=1,user-scalable=no">
 
 <title>UZBEK RP</title>
 
@@ -17,83 +15,389 @@ user-scalable=no">
     box-sizing:border-box;
     margin:0;
     padding:0;
+    user-select:none;
+    -webkit-user-select:none;
+    touch-action:none;
 }
 
 html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#75a852;
+    background:#657b58;
+    font-family:Arial,sans-serif;
 }
 
 canvas{
     position:fixed;
-    left:0;
-    top:0;
+    inset:0;
     width:100%;
     height:100%;
 }
+
+/* =========================
+   TOP
+========================= */
 
 #top{
     position:fixed;
     top:0;
     left:0;
     right:0;
-    height:58px;
-
-    background:#10150f;
-
+    height:62px;
+    background:
+        linear-gradient(
+            180deg,
+            #111711,
+            #080c08
+        );
     color:white;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-
-    padding:0 15px;
-
-    font-family:Arial;
-    z-index:10;
+    padding:0 14px;
+    z-index:20;
+    box-shadow:0 4px 14px #0008;
 }
 
 #logo{
-    font-size:20px;
-    font-weight:bold;
+    font-size:21px;
+    font-weight:900;
 }
 
 .info{
     display:flex;
-    gap:8px;
+    gap:7px;
 }
 
 .box{
-    background:#292e28;
-    padding:8px 10px;
-    border-radius:10px;
-    font-weight:bold;
+    background:#252c25;
+    border:1px solid #394239;
+    padding:9px 11px;
+    border-radius:13px;
     font-size:13px;
+    font-weight:bold;
 }
+
+/* =========================
+   M
+========================= */
 
 #m{
     position:fixed;
-
-    top:70px;
-    left:15px;
+    left:18px;
+    top:75px;
 
     width:58px;
     height:58px;
 
     border-radius:50%;
 
+    background:#181818;
+    color:white;
+
     border:4px solid white;
 
-    background:#222;
+    font-size:25px;
+    font-weight:900;
+
+    box-shadow:0 5px 14px #0008;
+
+    z-index:30;
+}
+
+/* =========================
+   JOYSTICK
+========================= */
+
+#joystick{
+    position:fixed;
+
+    left:22px;
+    bottom:22px;
+
+    width:150px;
+    height:150px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #304c28aa,
+            #172417cc
+        );
+
+    border:3px solid #ffffff55;
+
+    box-shadow:
+        inset 0 0 20px #0006,
+        0 5px 20px #0007;
+
+    z-index:30;
+}
+
+#stick{
+    position:absolute;
+
+    width:66px;
+    height:66px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffffff,
+            #c7cbc5
+        );
+
+    border:4px solid white;
+
+    box-shadow:
+        0 6px 15px #0008;
+}
+
+/* =========================
+   CAR BUTTONS
+========================= */
+
+#carControls{
+    position:fixed;
+
+    right:18px;
+    bottom:20px;
+
+    display:none;
+
+    flex-direction:column;
+
+    gap:9px;
+
+    z-index:30;
+}
+
+.ctrl{
+    width:112px;
+    height:56px;
+
+    border:0;
+
+    border-radius:17px;
 
     color:white;
 
-    font-size:25px;
+    font-size:17px;
+    font-weight:900;
+
+    box-shadow:0 6px 15px #0007;
+}
+
+#gas{
+    background:#19ad4b;
+}
+
+#brake{
+    background:#e93333;
+}
+
+#exit{
+    background:#ed8b19;
+}
+
+/* =========================
+   ENTER
+========================= */
+
+#enter{
+    position:fixed;
+
+    right:18px;
+    bottom:22px;
+
+    width:125px;
+    height:60px;
+
+    display:none;
+
+    border:0;
+    border-radius:50%;
+
+    background:#202020dd;
+
+    color:white;
+
+    font-size:15px;
+    font-weight:900;
+
+    box-shadow:0 5px 15px #0008;
+
+    z-index:30;
+}
+
+/* =========================
+   SPEED
+========================= */
+
+#speed{
+    position:fixed;
+
+    right:15px;
+    top:75px;
+
+    background:#111d;
+
+    color:white;
+
+    padding:8px 12px;
+
+    border-radius:12px;
+
     font-weight:bold;
 
-    z-index:20;
+    display:none;
+
+    z-index:25;
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+#msg{
+    position:fixed;
+
+    left:50%;
+    top:70%;
+
+    transform:translate(-50%,-50%);
+
+    background:#111e;
+
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:13px;
+
+    font-weight:bold;
+
+    opacity:0;
+
+    z-index:100;
+
+    pointer-events:none;
+}
+
+/* =========================
+   MENU
+========================= */
+
+#menu{
+    position:fixed;
+
+    inset:0;
+
+    background:#000b;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:200;
+}
+
+.menuBox{
+    width:310px;
+
+    padding:22px;
+
+    border-radius:22px;
+
+    background:#202420;
+
+    box-shadow:0 15px 40px #000;
+}
+
+.menuTitle{
+    color:white;
+
+    text-align:center;
+
+    font-size:25px;
+
+    font-weight:900;
+
+    margin-bottom:12px;
+}
+
+.menuButton{
+    width:100%;
+
+    height:52px;
+
+    margin-top:9px;
+
+    border:0;
+
+    border-radius:13px;
+
+    background:#383d38;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+}
+
+#close{
+    background:#b92f2f;
+}
+
+@media(max-width:700px){
+
+    #top{
+        height:58px;
+    }
+
+    #logo{
+        font-size:17px;
+    }
+
+    .box{
+        font-size:11px;
+        padding:7px;
+    }
+
+    #joystick{
+        width:135px;
+        height:135px;
+
+        left:16px;
+        bottom:15px;
+    }
+
+    #stick{
+        width:60px;
+        height:60px;
+    }
+
+    #carControls{
+        right:12px;
+        bottom:15px;
+    }
+
+    .ctrl{
+        width:105px;
+        height:54px;
+    }
 }
 
 </style>
@@ -112,11 +416,11 @@ canvas{
     <div class="info">
 
         <div class="box">
-            💰 500000 so‘m
+            💰 <span id="money">500000</span> so‘m
         </div>
 
         <div class="box">
-            ⛽ 97%
+            ⛽ <span id="fuel">97</span>%
         </div>
 
     </div>
@@ -125,8 +429,76 @@ canvas{
 
 <button id="m">M</button>
 
+<div id="speed">
+    0 km/h
+</div>
+
+<div id="joystick">
+
+    <div id="stick"></div>
+
+</div>
+
+<div id="carControls">
+
+    <button
+        id="exit"
+        class="ctrl">
+        TUSHISH
+    </button>
+
+    <button
+        id="gas"
+        class="ctrl">
+        GAZ
+    </button>
+
+    <button
+        id="brake"
+        class="ctrl">
+        TORMOZ
+    </button>
+
+</div>
+
+<button id="enter">
+    🚗 O‘TIRISH
+</button>
+
+<div id="msg"></div>
+
+<div id="menu">
+
+    <div class="menuBox">
+
+        <div class="menuTitle">
+            🇺🇿 UZBEK RP
+        </div>
+
+        <button class="menuButton">
+            🗺️ XARITA
+        </button>
+
+        <button class="menuButton">
+            ⚙️ SOZLAMALAR
+        </button>
+
+        <button
+            id="close"
+            class="menuButton">
+            ❌ YOPISH
+        </button>
+
+    </div>
+
+</div>
+
 
 <script>
+
+/* =====================================================
+   CANVAS
+===================================================== */
 
 const canvas =
 document.getElementById("game");
@@ -134,60 +506,551 @@ document.getElementById("game");
 const ctx =
 canvas.getContext("2d");
 
+let W =
+window.innerWidth;
 
-/* EKRAN */
+let H =
+window.innerHeight;
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width=W;
+canvas.height=H;
 
+window.addEventListener(
+    "resize",
+    ()=>{
+        W=window.innerWidth;
+        H=window.innerHeight;
 
-/* DUNYO */
-
-const W = 2400;
-const H = 1800;
-
-
-/* KAMERA */
-
-let cameraX = 0;
-let cameraY = 0;
-
-
-/* ==================================================
-   YER
-================================================== */
-
-ctx.fillStyle = "#72a552";
-
-ctx.fillRect(
-    0,
-    0,
-    W,
-    H
+        canvas.width=W;
+        canvas.height=H;
+    }
 );
 
 
-/* ==================================================
-   YO'L
-================================================== */
+/* =====================================================
+   WORLD
+===================================================== */
 
-function road(x,y,w,h){
+const WORLD_W=2600;
+const WORLD_H=1900;
 
-    /* trotuar */
 
-    ctx.fillStyle="#b5aa95";
+/* =====================================================
+   PLAYER
+===================================================== */
+
+let player={
+    x:1300,
+    y:900,
+
+    angle:0,
+
+    walkFrame:0,
+    walkTime:0
+};
+
+
+/* =====================================================
+   CAR
+===================================================== */
+
+let car={
+    x:1370,
+    y:900,
+
+    angle:0,
+
+    speed:0
+};
+
+
+let inCar=false;
+
+let fuel=97;
+
+
+/* =====================================================
+   JOYSTICK
+===================================================== */
+
+const joystick=
+document.getElementById("joystick");
+
+const stick=
+document.getElementById("stick");
+
+let joyX=0;
+let joyY=0;
+
+let joyActive=false;
+
+
+function moveJoystick(
+    x,
+    y
+){
+
+    const r=
+        joystick.getBoundingClientRect();
+
+    let dx=
+        x-(r.left+r.width/2);
+
+    let dy=
+        y-(r.top+r.height/2);
+
+    const max=48;
+
+    const len=
+        Math.sqrt(
+            dx*dx+
+            dy*dy
+        );
+
+    if(len>max){
+
+        dx=
+            dx/len*max;
+
+        dy=
+            dy/len*max;
+    }
+
+    joyX=dx/max;
+    joyY=dy/max;
+
+    stick.style.left=
+        "calc(50% + "+dx+"px)";
+
+    stick.style.top=
+        "calc(50% + "+dy+"px)";
+}
+
+
+function resetJoystick(){
+
+    joyActive=false;
+
+    joyX=0;
+    joyY=0;
+
+    stick.style.left="50%";
+    stick.style.top="50%";
+}
+
+
+joystick.addEventListener(
+    "pointerdown",
+    e=>{
+
+        joyActive=true;
+
+        joystick.setPointerCapture(
+            e.pointerId
+        );
+
+        moveJoystick(
+            e.clientX,
+            e.clientY
+        );
+    }
+);
+
+
+joystick.addEventListener(
+    "pointermove",
+    e=>{
+
+        if(joyActive){
+
+            moveJoystick(
+                e.clientX,
+                e.clientY
+            );
+        }
+    }
+);
+
+
+joystick.addEventListener(
+    "pointerup",
+    resetJoystick
+);
+
+joystick.addEventListener(
+    "pointercancel",
+    resetJoystick
+);
+
+
+/* =====================================================
+   GAZ / TORMOZ
+===================================================== */
+
+let gasPressed=false;
+
+let brakePressed=false;
+
+
+function holdButton(
+    element,
+    start,
+    stop
+){
+
+    element.addEventListener(
+        "pointerdown",
+        e=>{
+            e.preventDefault();
+            start();
+        }
+    );
+
+    element.addEventListener(
+        "pointerup",
+        e=>{
+            e.preventDefault();
+            stop();
+        }
+    );
+
+    element.addEventListener(
+        "pointercancel",
+        stop
+    );
+}
+
+
+holdButton(
+    document.getElementById("gas"),
+
+    ()=>{
+        gasPressed=true;
+    },
+
+    ()=>{
+        gasPressed=false;
+    }
+);
+
+
+holdButton(
+    document.getElementById("brake"),
+
+    ()=>{
+        brakePressed=true;
+    },
+
+    ()=>{
+        brakePressed=false;
+    }
+);
+
+
+/* =====================================================
+   CAR PHYSICS
+===================================================== */
+
+function updateCar(){
+
+    /* RUL */
+
+    if(
+        Math.abs(car.speed)>0.1
+    ){
+
+        car.angle +=
+            joyX *
+            0.045 *
+            Math.min(
+                Math.abs(car.speed)/3,
+                1
+            ) *
+            (
+                car.speed>=0
+                ? 1
+                : -1
+            );
+    }
+
+
+    /* GAZ */
+
+    if(
+        gasPressed &&
+        fuel>0
+    ){
+
+        if(car.speed<0){
+
+            car.speed+=0.25;
+
+            if(car.speed>0){
+                car.speed=0;
+            }
+
+        }else{
+
+            car.speed+=0.15;
+
+            if(car.speed>7){
+                car.speed=7;
+            }
+        }
+
+        fuel-=0.003;
+    }
+
+
+    /* TORMOZ */
+
+    else if(
+        brakePressed
+    ){
+
+        if(car.speed>0){
+
+            car.speed-=0.35;
+
+            if(car.speed<0){
+                car.speed=0;
+            }
+
+        }else{
+
+            car.speed-=0.11;
+
+            if(car.speed<-2.5){
+                car.speed=-2.5;
+            }
+        }
+    }
+
+
+    /* TABIIY TOXTASH */
+
+    else{
+
+        if(car.speed>0){
+
+            car.speed-=0.045;
+
+            if(car.speed<0){
+                car.speed=0;
+            }
+        }
+
+        if(car.speed<0){
+
+            car.speed+=0.045;
+
+            if(car.speed>0){
+                car.speed=0;
+            }
+        }
+    }
+
+
+    /* HARAKAT */
+
+    car.x +=
+        Math.sin(car.angle) *
+        car.speed;
+
+    car.y -=
+        Math.cos(car.angle) *
+        car.speed;
+
+
+    /* CHEGARALAR */
+
+    car.x=
+        Math.max(
+            40,
+            Math.min(
+                WORLD_W-40,
+                car.x
+            )
+        );
+
+    car.y=
+        Math.max(
+            80,
+            Math.min(
+                WORLD_H-40,
+                car.y
+            )
+        );
+
+
+    player.x=car.x;
+    player.y=car.y;
+
+
+    document.getElementById(
+        "fuel"
+    ).textContent=
+        Math.floor(
+            Math.max(
+                0,
+                fuel
+            )
+        );
+
+
+    document.getElementById(
+        "speed"
+    ).textContent=
+        Math.round(
+            Math.abs(car.speed)*12
+        )+
+        " km/h";
+}
+
+
+/* =====================================================
+   REALISTIC WALK
+===================================================== */
+
+function updatePlayer(){
+
+    if(inCar){
+        return;
+    }
+
+
+    const moving=
+        Math.abs(joyX)+
+        Math.abs(joyY)>0.12;
+
+
+    if(moving){
+
+        /*
+          Tezlikni diagonalda oshirib
+          yubormaslik
+        */
+
+        const length=
+            Math.sqrt(
+                joyX*joyX+
+                joyY*joyY
+            );
+
+        let nx=joyX;
+        let ny=joyY;
+
+        if(length>1){
+
+            nx/=length;
+            ny/=length;
+        }
+
+
+        const walkSpeed=2.6;
+
+
+        player.x +=
+            nx*walkSpeed;
+
+        player.y +=
+            ny*walkSpeed;
+
+
+        /*
+          Odam yurayotgan tomonga qaraydi
+        */
+
+        player.angle=
+            Math.atan2(
+                nx,
+                -ny
+            );
+
+
+        /*
+          YURISH ANIMATSIYASI
+
+          Oyoqlar navbat bilan
+          oldinga-orqaga chiqadi
+        */
+
+        player.walkTime+=0.18;
+
+        player.walkFrame=
+            Math.sin(
+                player.walkTime
+            );
+
+    }else{
+
+        /*
+          To'xtaganda oyoqlar
+          ham to'xtaydi
+        */
+
+        player.walkFrame=0;
+    }
+
+
+    player.x=
+        Math.max(
+            30,
+            Math.min(
+                WORLD_W-30,
+                player.x
+            )
+        );
+
+    player.y=
+        Math.max(
+            80,
+            Math.min(
+                WORLD_H-30,
+                player.y
+            )
+        );
+}
+
+
+/* =====================================================
+   ROAD
+===================================================== */
+
+function road(
+    x,
+    y,
+    w,
+    h
+){
+
+    /* TROTuar */
+
+    ctx.fillStyle="#b8ae99";
 
     ctx.fillRect(
-        x-12,
-        y-12,
-        w+24,
-        h+24
+        x-14,
+        y-14,
+        w+28,
+        h+28
+    );
+
+
+    /* bordyur */
+
+    ctx.fillStyle="#d4c6a8";
+
+    ctx.fillRect(
+        x-6,
+        y-6,
+        w+12,
+        h+12
     );
 
 
     /* asfalt */
 
-    ctx.fillStyle="#303438";
+    ctx.fillStyle="#34383b";
 
     ctx.fillRect(
         x,
@@ -197,15 +1060,42 @@ function road(x,y,w,h){
     );
 
 
-    /* yo'l chizig'i */
+    /* asfalt teksturasi */
 
-    ctx.strokeStyle="#e8d36b";
+    ctx.fillStyle="#ffffff05";
+
+    for(
+        let i=0;
+        i<120;
+        i++
+    ){
+
+        let px=
+            x+
+            Math.random()*w;
+
+        let py=
+            y+
+            Math.random()*h;
+
+        ctx.fillRect(
+            px,
+            py,
+            2,
+            2
+        );
+    }
+
+
+    /* sariq chiziq */
+
+    ctx.strokeStyle="#e7c94c";
 
     ctx.lineWidth=5;
 
     ctx.setLineDash([
-        35,
-        25
+        38,
+        28
     ]);
 
     ctx.beginPath();
@@ -233,7 +1123,6 @@ function road(x,y,w,h){
             x+w/2,
             y+h
         );
-
     }
 
     ctx.stroke();
@@ -242,49 +1131,73 @@ function road(x,y,w,h){
 }
 
 
-/* asosiy yo'llar */
+/* =====================================================
+   CROSSWALK
+===================================================== */
 
-road(
-    0,
-    650,
-    W,
-    230
-);
+function crosswalk(
+    x,
+    y,
+    vertical=false
+){
 
-road(
-    1050,
-    0,
-    230,
-    H
-);
+    ctx.fillStyle="#eee";
 
-road(
-    300,
-    1150,
-    1700,
-    130
-);
+    if(!vertical){
+
+        for(
+            let i=0;
+            i<9;
+            i++
+        ){
+
+            ctx.fillRect(
+                x+i*24,
+                y,
+                14,
+                70
+            );
+        }
+
+    }else{
+
+        for(
+            let i=0;
+            i<9;
+            i++
+        ){
+
+            ctx.fillRect(
+                x,
+                y+i*24,
+                70,
+                14
+            );
+        }
+    }
+}
 
 
-/* ==================================================
-   BINO
-================================================== */
+/* =====================================================
+   BUILDING
+===================================================== */
 
 function building(
     x,
     y,
     w,
     h,
-    name
+    name,
+    color
 ){
 
     /* soya */
 
-    ctx.fillStyle="#0004";
+    ctx.fillStyle="#0005";
 
     ctx.fillRect(
         x+12,
-        y+12,
+        y+14,
         w,
         h
     );
@@ -292,7 +1205,8 @@ function building(
 
     /* bino */
 
-    ctx.fillStyle="#c8b18e";
+    ctx.fillStyle=
+        color || "#c7b08b";
 
     ctx.fillRect(
         x,
@@ -304,13 +1218,13 @@ function building(
 
     /* tom */
 
-    ctx.fillStyle="#594e42";
+    ctx.fillStyle="#6b5b4a";
 
     ctx.fillRect(
         x-5,
-        y-12,
+        y-14,
         w+10,
-        14
+        16
     );
 
 
@@ -319,31 +1233,34 @@ function building(
     for(
         let xx=x+25;
         xx<x+w-30;
-        xx+=65
+        xx+=60
     ){
 
         for(
             let yy=y+30;
-            yy<y+h-50;
-            yy+=60
+            yy<y+h-55;
+            yy+=58
         ){
 
-            ctx.fillStyle="#284657";
+            ctx.fillStyle="#244657";
 
             ctx.fillRect(
                 xx,
                 yy,
-                35,
-                38
+                32,
+                35
             );
 
-            ctx.strokeStyle="#ddd";
+
+            ctx.strokeStyle="#d7d1bd";
+
+            ctx.lineWidth=2;
 
             ctx.strokeRect(
                 xx,
                 yy,
-                35,
-                38
+                32,
+                35
             );
         }
     }
@@ -351,124 +1268,50 @@ function building(
 
     /* eshik */
 
-    ctx.fillStyle="#513728";
+    ctx.fillStyle="#533727";
 
     ctx.fillRect(
-        x+w/2-25,
-        y+h-75,
-        50,
-        75
+        x+w/2-27,
+        y+h-78,
+        54,
+        78
     );
 
 
-    /* nomi */
+    /* yozuv */
 
     ctx.fillStyle="white";
 
-    ctx.font="bold 20px Arial";
+    ctx.font=
+        "bold 20px Arial";
 
     ctx.textAlign="center";
 
     ctx.fillText(
         name,
         x+w/2,
-        y+h-85
+        y+h-88
     );
 }
 
 
-/* binolar */
-
-building(
-    100,
-    100,
-    350,
-    300,
-    "BANK"
-);
-
-building(
-    530,
-    100,
-    300,
-    260,
-    "DO'KON"
-);
-
-building(
-    900,
-    100,
-    280,
-    300,
-    "KAFE"
-);
-
-building(
-    1450,
-    100,
-    400,
-    300,
-    "SHIFOXONA"
-);
-
-building(
-    1950,
-    100,
-    330,
-    300,
-    "POLITSIYA"
-);
-
-building(
-    100,
-    950,
-    350,
-    220,
-    "OFIS"
-);
-
-building(
-    520,
-    950,
-    330,
-    220,
-    "MAHALLA"
-);
-
-building(
-    1450,
-    950,
-    350,
-    250,
-    "AVTOSALON"
-);
-
-building(
-    1900,
-    950,
-    400,
-    260,
-    "SERVIS"
-);
-
-
-/* ==================================================
-   DARAxt
-================================================== */
+/* =====================================================
+   TREE
+===================================================== */
 
 function tree(x,y){
 
     /* soya */
 
-    ctx.fillStyle="#0003";
+    ctx.fillStyle="#0005";
 
     ctx.beginPath();
 
     ctx.ellipse(
         x,
         y+30,
-        32,
-        10,
+        35,
+        11,
         0,
         0,
         Math.PI*2
@@ -491,14 +1334,14 @@ function tree(x,y){
 
     /* barg */
 
-    ctx.fillStyle="#2f7d3b";
+    ctx.fillStyle="#2d7138";
 
     ctx.beginPath();
 
     ctx.arc(
         x,
         y,
-        32,
+        35,
         0,
         Math.PI*2
     );
@@ -506,77 +1349,22 @@ function tree(x,y){
     ctx.fill();
 
 
-    ctx.fillStyle="#3d9448";
+    ctx.fillStyle="#489447";
 
     ctx.beginPath();
 
     ctx.arc(
-        x-18,
-        y-5,
-        20,
+        x-20,
+        y-7,
+        22,
         0,
         Math.PI*2
     );
 
     ctx.arc(
-        x+18,
-        y-5,
-        20,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
-}
-
-
-/* daraxtlar */
-
-tree(70,500);
-tree(500,500);
-tree(900,500);
-tree(1500,500);
-tree(2100,500);
-
-tree(70,900);
-tree(500,900);
-tree(900,900);
-tree(1500,900);
-tree(2200,900);
-
-tree(100,1400);
-tree(500,1400);
-tree(1000,1450);
-tree(1700,1400);
-tree(2200,1450);
-
-
-/* ==================================================
-   MASHINA
-================================================== */
-
-function car(
-    x,
-    y
-){
-
-    ctx.save();
-
-    ctx.translate(x,y);
-
-
-    /* soya */
-
-    ctx.fillStyle="#0005";
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-        0,
-        12,
-        50,
-        28,
-        0,
+        x+20,
+        y-7,
+        22,
         0,
         Math.PI*2
     );
@@ -584,275 +1372,159 @@ function car(
     ctx.fill();
 
 
-    /* g'ildiraklar */
-
-    ctx.fillStyle="#111";
-
-    ctx.fillRect(
-        -38,
-        -32,
-        15,
-        28
-    );
-
-    ctx.fillRect(
-        23,
-        -32,
-        15,
-        28
-    );
-
-    ctx.fillRect(
-        -38,
-        5,
-        15,
-        28
-    );
-
-    ctx.fillRect(
-        23,
-        5,
-        15,
-        28
-    );
-
-
-    /* mashina kuzovi */
-
-    ctx.fillStyle="#1976d2";
-
-    ctx.beginPath();
-
-    ctx.roundRect(
-        -32,
-        -48,
-        64,
-        96,
-        15
-    );
-
-    ctx.fill();
-
-
-    /* oynalar */
-
-    ctx.fillStyle="#183244";
-
-    ctx.beginPath();
-
-    ctx.roundRect(
-        -23,
-        -30,
-        46,
-        55,
-        10
-    );
-
-    ctx.fill();
-
-
-    /* oyna chizig'i */
-
-    ctx.strokeStyle="#78b9dc";
-
-    ctx.lineWidth=2;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        -23,
-        0
-    );
-
-    ctx.lineTo(
-        23,
-        0
-    );
-
-    ctx.stroke();
-
-
-    /* faralar */
-
-    ctx.fillStyle="#fff1a8";
-
-    ctx.fillRect(
-        -22,
-        -45,
-        15,
-        8
-    );
-
-    ctx.fillRect(
-        7,
-        -45,
-        15,
-        8
-    );
-
-
-    /* stop */
-
-    ctx.fillStyle="#e22";
-
-    ctx.fillRect(
-        -22,
-        36,
-        15,
-        7
-    );
-
-    ctx.fillRect(
-        7,
-        36,
-        15,
-        7
-    );
-
-
-    /* nomer */
-
-    ctx.fillStyle="white";
-
-    ctx.fillRect(
-        -14,
-        28,
-        28,
-        8
-    );
-
-
-    ctx.restore();
-}
-
-
-/* ==================================================
-   ODAM
-================================================== */
-
-function person(
-    x,
-    y
-){
-
-    ctx.save();
-
-    ctx.translate(x,y);
-
-
-    /* soya */
-
-    ctx.fillStyle="#0004";
-
-    ctx.beginPath();
-
-    ctx.ellipse(
-        0,
-        28,
-        20,
-        8,
-        0,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
-
-
-    /* oyoq */
-
-    ctx.strokeStyle="#202838";
-
-    ctx.lineWidth=8;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-        -5,
-        8
-    );
-
-    ctx.lineTo(
-        -9,
-        28
-    );
-
-    ctx.moveTo(
-        5,
-        8
-    );
-
-    ctx.lineTo(
-        9,
-        28
-    );
-
-    ctx.stroke();
-
-
-    /* tana */
-
-    ctx.fillStyle="#ed7927";
-
-    ctx.fillRect(
-        -14,
-        -10,
-        28,
-        28
-    );
-
-
-    /* bosh */
-
-    ctx.fillStyle="#d79a6c";
+    ctx.fillStyle="#6caf52";
 
     ctx.beginPath();
 
     ctx.arc(
-        0,
-        -22,
-        12,
-        0,
-        Math.PI*2
-    );
-
-    ctx.fill();
-
-
-    /* soch */
-
-    ctx.fillStyle="#222";
-
-    ctx.beginPath();
-
-    ctx.arc(
-        0,
-        -26,
+        x-10,
+        y-18,
         11,
-        Math.PI,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+}
+
+
+/* =====================================================
+   STREET LIGHT
+===================================================== */
+
+function lamp(x,y){
+
+    ctx.strokeStyle="#252525";
+
+    ctx.lineWidth=6;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        x,
+        y+55
+    );
+
+    ctx.lineTo(
+        x,
+        y
+    );
+
+    ctx.stroke();
+
+
+    ctx.fillStyle="#ffd978";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        9,
+        0,
         Math.PI*2
     );
 
     ctx.fill();
 
 
-    ctx.restore();
+    ctx.fillStyle="#fff4a5";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        5,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
 }
 
 
-/* ==================================================
-   GAZ ZAPRAWKA
-================================================== */
+/* =====================================================
+   TRAFFIC LIGHT
+===================================================== */
 
-function gasStation(x,y){
+function trafficLight(
+    x,
+    y
+){
+
+    ctx.fillStyle="#202020";
+
+    ctx.fillRect(
+        x,
+        y,
+        28,
+        80
+    );
+
+
+    ctx.fillStyle="#e33";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x+14,
+        y+15,
+        7,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.fillStyle="#e9c532";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x+14,
+        y+40,
+        7,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.fillStyle="#32d45c";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x+14,
+        y+65,
+        7,
+        0,
+        Math.PI*2
+    );
+
+    ctx.fill();
+}
+
+
+/* =====================================================
+   GAS STATION
+===================================================== */
+
+function gasStation(
+    x,
+    y
+){
 
     ctx.fillStyle="#eeeeee";
 
     ctx.fillRect(
         x,
         y,
-        180,
-        110
+        230,
+        130
     );
 
 
@@ -861,219 +1533,15 @@ function gasStation(x,y){
     ctx.fillRect(
         x,
         y,
-        180,
-        25
+        230,
+        32
     );
 
 
     ctx.fillStyle="white";
 
-    ctx.font="bold 16px Arial";
+    ctx.font=
+        "bold 21px Arial";
 
     ctx.fillText(
-        "UZ OIL",
-        x+12,
-        y+18
-    );
-
-
-    for(
-        let i=0;
-        i<3;
-        i++
-    ){
-
-        ctx.fillStyle="#222";
-
-        ctx.fillRect(
-            x+30+i*45,
-            y+45,
-            20,
-            45
-        );
-    }
-}
-
-
-gasStation(
-    820,
-    520
-);
-
-gasStation(
-    1600,
-    520
-);
-
-gasStation(
-    2200,
-    600
-);
-
-
-/* ==================================================
-   MASHINA VA ODAM
-================================================== */
-
-car(
-    1150,
-    765
-);
-
-person(
-    1250,
-    765
-);
-
-
-/* ==================================================
-   KAMERA
-================================================== */
-
-cameraX =
-1150 - canvas.width/2;
-
-cameraY =
-765 - canvas.height/2;
-
-
-/* EKRANGA CHIQARISH */
-
-function render(){
-
-    ctx.setTransform(
-        1,
-        0,
-        0,
-        1,
-        0,
-        0
-    );
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    ctx.translate(
-        -cameraX,
-        -cameraY
-    );
-
-    /* yana yer */
-
-    ctx.fillStyle="#72a552";
-
-    ctx.fillRect(
-        0,
-        0,
-        W,
-        H
-    );
-
-    /* yo'llar */
-
-    road(
-        0,
-        650,
-        W,
-        230
-    );
-
-    road(
-        1050,
-        0,
-        230,
-        H
-    );
-
-    road(
-        300,
-        1150,
-        1700,
-        130
-    );
-
-    /* binolar */
-
-    building(100,100,350,300,"BANK");
-    building(530,100,300,260,"DO'KON");
-    building(900,100,280,300,"KAFE");
-    building(1450,100,400,300,"SHIFOXONA");
-    building(1950,100,330,300,"POLITSIYA");
-
-    building(100,950,350,220,"OFIS");
-    building(520,950,330,220,"MAHALLA");
-    building(1450,950,350,250,"AVTOSALON");
-    building(1900,950,400,260,"SERVIS");
-
-    /* zapravkalar */
-
-    gasStation(820,520);
-    gasStation(1600,520);
-    gasStation(2200,600);
-
-    /* daraxtlar */
-
-    tree(70,500);
-    tree(500,500);
-    tree(900,500);
-    tree(1500,500);
-    tree(2100,500);
-
-    tree(70,900);
-    tree(500,900);
-    tree(900,900);
-    tree(1500,900);
-    tree(2200,900);
-
-    /* mashina */
-
-    car(1150,765);
-
-    /* odam */
-
-    person(1250,765);
-}
-
-render();
-
-
-/* ekran o'zgarsa */
-
-window.addEventListener(
-    "resize",
-    function(){
-
-        canvas.width =
-            window.innerWidth;
-
-        canvas.height =
-            window.innerHeight;
-
-        cameraX =
-            1150-canvas.width/2;
-
-        cameraY =
-            765-canvas.height/2;
-
-        render();
-    }
-);
-
-
-/* M */
-
-document.getElementById("m").onclick=function(){
-
-    alert(
-        "UZBEK RP\n\nXARITA\nSOZLAMALAR"
-    );
-};
-
-</script>
-
-</body>
-</html>
+       
