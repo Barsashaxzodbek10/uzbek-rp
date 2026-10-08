@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>UZBEK RP</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#328c46;font-family:Arial,sans-serif;touch-action:none}
+#game{position:fixed;inset:0;width:100%;height:100%;display:block}
+button{border:0;color:#fff;font-weight:700;font-size:16px;border-radius:12px}
+#top{position:fixed;left:0;top:0;right:0;height:64px;background:#0f0f12;color:#fff;display:flex;align-items:center;gap:24px;padding:0 18px;z-index:5}
+#title{font-size:24px;color:#f0be28;font-weight:800}
+#menuBtn{position:fixed;left:14px;top:78px;width:54px;height:54px;border-radius:50%;background:#111;z-index:6}
+#joystick{position:fixed;left:18px;bottom:18px;width:125px;height:125px;border-radius:50%;background:#333b;z-index:6;border:3px solid #fff3}
+#knob{position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px;border-radius:50%;background:#aaa}
+#actions{position:fixed;right:14px;bottom:14px;display:flex;flex-direction:column;gap:7px;width:120px;z-index:6}
+.action{height:50px}.orange{background:#e68228}.green{background:#28b45a}.red{background:#d23c3c}
+.hidden{display:none!important}
+#menu,#map{position:fixed;inset:0;background:#000c;z-index:10;display:flex;align-items:center;justify-content:center}
+.panel{width:min(90vw,420px);background:#232830;border-radius:22px;padding:24px}
+.panel h2{margin:0 0 18px;color:#f0be28;text-align:center}
+.panel button{display:block;width:100%;height:56px;margin:10px 0;background:#2878be}
+#mapCanvas{width:90vw;max-width:760px;height:70vh;max-height:430px;background:#246b39;border-radius:18px}
+#mapBack{position:absolute;left:20px;bottom:20px;width:130px;height:50px;background:#d23c3c}
+</style>
+</head>
+
+<body>
+
+<canvas id="game"></canvas>
+
+<div id="top">
+<b id="title">UZBEK RP</b>
+<span>Pul: <b>500000</b> so'm</span>
+<span>⛽ <b id="fuel">98</b>%</span>
+</div>
+
+<button id="menuBtn">M</button>
+
+<div id="joystick">
+<div id="knob"></div>
+</div>
+
+<div id="actions">
+<button id="exit" class="action orange">TUSHISH</button>
+<button id="sit" class="action green hidden">O'TIRISH</button>
+<button id="gas" class="action green">GAZ</button>
+<button id="brake" class="action red">TORMOZ</button>
+</div>
+
+<div id="menu" class="hidden">
+<div class="panel">
+<h2>MENYU</h2>
+<button id="openMap">XARITA</button>
+<button id="closeMenu" style="background:#d23c3c">YOPISH</button>
+</div>
+</div>
+
+<div id="map" class="hidden">
+<canvas id="mapCanvas" width="760" height="430"></canvas>
+<button id="mapBack">ORTGA</button>
+</div>
+
+<script>
+
+const c=document.getElementById("game");
+const x=c.getContext("2d");
+
+const m=document.getElementById("mapCanvas");
+const mx=m.getContext("2d");
+
+let W=innerWidth;
+let H=innerHeight;
+
+function size(){
+W=innerWidth;
+H=innerHeight;
+c.width=W;
+c.height=H;
+}
+
+addEventListener("resize",size);
+size();
+
+let car={
+x:W/2,
+y:H/2
+};
+
+let p={
+x:W/2+65,
+y:H/2
+};
+
+let inCar=true;
+let fuel=98;
+
+let joy={
+on:false,
+x:0,
+y:0
+};
+
+const je=document.getElementById("joystick");
+const kn=document.getElementById("knob");
+
+function center(){
+
+let r=je.getBoundingClientRect();
+
+return {
+x:r.left+r.width/2,
+y:r.top+r.height/2,
+r:r.width/2
+};
+
+}
+
+function setJoy(a,b){
+
+let q=center();
+
+let dx=a-q.x;
+let dy=b-q.y;
+
+let d=Math.hypot(dx,dy);
+
+let z=q.r-27;
+
+let k=Math.min(1,z/(d||1));
+
+joy.x=dx*k;
+joy.y=dy*k;
+
+kn.style.transform=
+`translate(${joy.x}px,${joy.y}px)`;
+
+}
+
+function reset(){
+
+joy.on=false;
+joy.x=0;
+joy.y=0;
+
+kn.style.transform="translate(0,0)";
+
+}
+
+je.onpointerdown=e=>{
+joy.on=true;
+setJoy(e.clientX,e.clientY);
+};
+
+je.onpointermove=e=>{
+if(joy.on)
+setJoy(e.clientX,e.clientY);
+};
+
+je.onpointerup=reset;
+je.onpointercancel=reset;
+
+let gas=false;
+let brake=false;
+
+function hold(id,set){
+
+let b=document.getElementById(id);
+
+b.onpointerdown=e=>{
+e.preventDefault();
+set(true);
+};
+
+b.onpointerup=e=>{
+e.preventDefault();
+set(false);
+};
+
+b.onpointercancel=()=>{
+set(false);
+};
+
+}
+
+hold("gas",v=>gas=v);
+hold("brake",v=>brake=v);
+
+const exit=document.getElementById("exit");
+const sit=document.getElementById("sit");
+
+function buttons(){
+
+exit.classList.toggle("hidden",!inCar);
+
+document.getElementById("gas")
+.classList.toggle("hidden",!inCar);
+
+document.getElementById("brake")
+.classList.toggle("hidden",!inCar);
+
+sit.classList.toggle(
+"hidden",
+inCar ||
+Math.hypot(p.x-car.x,p.y-car.y)>=95
+);
+
+}
+
+exit.onclick=()=>{
+
+if(inCar){
+
+inCar=false;
+
+p.x=car.x+65;
+p.y=car.y;
+
+reset();
+
+buttons();
+
+}
+
+};
+
+sit.onclick=()=>{
+
+if(
+!inCar &&
+Math.hypot(p.x-car.x,p.y-car.y)<95
+){
+
+inCar=true;
+
+car.x=p.x;
+car.y=p.y;
+
+reset();
+
+buttons();
+
+}
+
+};
+
+function rr(a,b,w,h,r){
+
+x.beginPath();
+
+x.roundRect(a,b,w,h,r);
+
+x.fill();
+
+}
+
+function carDraw(a,b){
+
+x.fillStyle="#2878dc";
+
+rr(
+a-25,
+b-45,
+50,
+90,
+10
+);
+
+x.fillStyle="#70b8dc";
+
+rr(
+a-15,
+b-31,
+30,
+22,
+5
+);
+
+}
+
+function person(a,b){
+
+x.fillStyle="#ebbea0";
+
+x.beginPath();
+
+x.arc(
+a,
+b-15,
+9,
+0,
+7
+);
+
+x.fill();
+
+x.fillStyle="#e68228";
+
+rr(
+a-8,
+b-6,
+16,
+25,
+5
+);
+
+x.strokeStyle="#111";
+
+x.lineWidth=4;
+
+x.beginPath();
+
+x.moveTo(a-4,b+18);
+x.lineTo(a-9,b+32);
+
+x.moveTo(a+4,b+18);
+x.lineTo(a+9,b+32);
+
+x.stroke();
+
+}
+
+function city(){
+
+x.fillStyle="#328c46";
+
+x.fillRect(
+0,
+0,
+W,
+H
+);
+
+x.fillStyle="#3c3c41";
+
+x.fillRect(
+0,
+180,
+W,
+100
+);
+
+x.fillRect(
+W*.44,
+64,
+100,
+H
+);
+
+[
+[50,100],
+[150,100],
+[W-280,100],
+[W-170,100]
+].forEach(q=>{
+
+x.fillStyle="#a0917d";
+
+x.fillRect(
+q[0],
+q[1],
+80,
+70
+);
+
+x.fillStyle="#466478";
+
+x.fillRect(
+q[0]+15,
+q[1]+15,
+20,
+20
+);
+
+x.fillRect(
+q[0]+45,
+q[1]+15,
+20,
+20
+);
+
+});
+
+}
+
+function draw(){
+
+city();
+
+carDraw(
+car.x,
+car.y
+);
+
+if(!inCar)
+person(
+p.x,
+p.y
+);
+
+}
+
+function update(){
+
+let dx=joy.x/65;
+let dy=joy.y/65;
+
+if(inCar){
+
+car.x+=dx*4.5;
+car.y+=dy*4.5;
+
+if(gas)
+fuel=Math.max(
+0,
+fuel-.02
+);
+
+if(brake){
+
+car.x-=dx*3;
+car.y-=dy*3;
+
+}
+
+car.x=Math.max(
+30,
+Math.min(W-30,car.x)
+);
+
+car.y=Math.max(
+100,
+Math.min(H-50,car.y)
+);
+
+}
+
+else{
+
+p.x+=dx*3.8;
+p.y+=dy*3.8;
+
+p.x=Math.max(
+20,
+Math.min(W-20,p.x)
+);
+
+p.y=Math.max(
+95,
+Math.min(H-35,p.y)
+);
+
+}
+
+document.getElementById("fuel")
+.textContent=Math.floor(fuel);
+
+buttons();
+
+}
+
+function loop(){
+
+update();
+
+draw();
+
+requestAnimationFrame(loop);
+
+}
+
+loop();
+
+const menu=document.getElementById("menu");
+const map=document.getElementById("map");
+
+document.getElementById("menuBtn").onclick=()=>{
+
+menu.classList.remove("hidden");
+
+};
+
+document.getElementById("closeMenu").onclick=()=>{
+
+menu.classList.add("hidden");
+
+};
+
+document.getElementById("openMap").onclick=()=>{
+
+menu.classList.add("hidden");
+
+map.classList.remove("hidden");
+
+mapDraw();
+
+};
+
+document.getElementById("mapBack").onclick=()=>{
+
+map.classList.add("hidden");
+
+};
+
+function mapDraw(){
+
+mx.fillStyle="#246b39";
+
+mx.fillRect(
+0,
+0,
+760,
+430
+);
+
+mx.fillStyle="#3c3c41";
+
+mx.fillRect(
+0,
+185,
+760,
+70
+);
+
+mx.fillRect(
+345,
+0,
+70,
+430
+);
+
+let a=[
+
+["BANK",100,110,"#2878dc"],
+
+["SHIFOXONA",260,110,"#d23c3c"],
+
+["POLITSIYA",500,110,"#2878dc"],
+
+["AVTOSALON",660,110,"#f0be28"],
+
+["ZAP",100,330,"#d23c3c"],
+
+["QURILISH",280,330,"#e68228"],
+
+["BETON",500,330,"#777"],
+
+["DO'KON",660,330,"#f0be28"]
+
+];
+
+mx.font="18px Arial";
+mx.textAlign="center";
+
+a.forEach(q=>{
+
+mx.fillStyle=q[3];
+
+mx.beginPath();
+
+mx.arc(
+q[1],
+q[2],
+16,
+0,
+7
+);
+
+mx.fill();
+
+mx.fillStyle="#fff";
+
+mx.fillText(
+q[0],
+q[1],
+q[2]+38
+);
+
+});
+
+}
+
+buttons();
+
+</script>
+
+</body>
+  </html>
