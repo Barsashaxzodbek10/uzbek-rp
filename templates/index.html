@@ -2,15 +2,14 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>UZBEK RP</title>
 
 <style>
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
     user-select:none;
     -webkit-user-select:none;
     touch-action:none;
@@ -20,289 +19,237 @@ html,body{
     width:100%;
     height:100%;
     overflow:hidden;
-    background:#111;
+    background:#78a957;
     font-family:Arial,sans-serif;
 }
 
 #game{
     position:fixed;
-    inset:0;
+    left:0;
+    top:0;
     width:100%;
     height:100%;
     display:block;
-    background:#78a85a;
 }
 
-/* TOP BAR */
-#topbar{
+#top{
     position:fixed;
     top:0;
     left:0;
     right:0;
     height:58px;
-    background:rgba(10,10,10,.88);
+    background:rgba(8,12,9,.94);
     color:white;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 18px;
-    z-index:20;
-    box-shadow:0 3px 10px rgba(0,0,0,.35);
+    padding:0 14px;
+    z-index:10;
 }
 
-.logo{
-    font-weight:900;
+#logo{
     font-size:20px;
-    letter-spacing:1px;
+    font-weight:900;
 }
 
 .stats{
     display:flex;
-    gap:12px;
-    font-size:14px;
-    font-weight:bold;
+    gap:7px;
 }
 
 .stat{
-    background:rgba(255,255,255,.08);
-    padding:7px 10px;
-    border-radius:9px;
+    background:#252c25;
+    border-radius:10px;
+    padding:8px 10px;
+    font-size:13px;
+    font-weight:bold;
 }
 
-/* M BUTTON */
-#mButton{
+#m{
     position:fixed;
-    left:15px;
-    top:72px;
+    left:14px;
+    top:70px;
     width:58px;
     height:58px;
     border-radius:50%;
-    border:3px solid white;
+    border:4px solid white;
     background:#222;
     color:white;
-    font-size:22px;
+    font-size:25px;
     font-weight:900;
-    z-index:30;
-    box-shadow:0 4px 12px rgba(0,0,0,.4);
+    z-index:20;
 }
 
-/* CONTROLS */
 #joystick{
     position:fixed;
-    left:24px;
-    bottom:25px;
-    width:145px;
-    height:145px;
+    left:20px;
+    bottom:18px;
+    width:140px;
+    height:140px;
     border-radius:50%;
-    background:rgba(0,0,0,.25);
-    border:3px solid rgba(255,255,255,.38);
-    z-index:25;
+    background:rgba(30,60,20,.5);
+    border:3px solid rgba(255,255,255,.35);
+    z-index:20;
 }
 
 #stick{
     position:absolute;
-    width:68px;
-    height:68px;
     left:50%;
     top:50%;
+    width:64px;
+    height:64px;
     transform:translate(-50%,-50%);
     border-radius:50%;
-    background:rgba(235,235,235,.75);
-    border:3px solid rgba(255,255,255,.9);
-    box-shadow:0 4px 12px rgba(0,0,0,.3);
+    background:#d5d9d2;
+    border:4px solid white;
+    box-shadow:0 5px 15px #0008;
 }
 
-#buttons{
+#controls{
     position:fixed;
-    right:22px;
-    bottom:25px;
+    right:15px;
+    bottom:18px;
     display:flex;
     flex-direction:column;
-    gap:12px;
-    z-index:25;
+    gap:10px;
+    z-index:20;
 }
 
-.control{
+.ctrl{
     width:110px;
-    height:62px;
+    height:58px;
     border:0;
-    border-radius:18px;
+    border-radius:17px;
     color:white;
     font-size:17px;
     font-weight:900;
-    box-shadow:0 5px 12px rgba(0,0,0,.3);
+    box-shadow:0 5px 12px #0006;
 }
 
 #gas{
-    background:#20a84a;
+    background:#18ad4b;
 }
 
 #brake{
-    background:#e53935;
+    background:#ed3434;
 }
 
-#exitCar{
-    background:#ed8b16;
+#exit{
+    background:#ed8b19;
     display:none;
 }
 
-#enterCar{
+#enter{
     position:fixed;
-    right:22px;
-    bottom:25px;
-    width:130px;
-    height:62px;
+    right:15px;
+    bottom:18px;
+    width:125px;
+    height:58px;
     border:0;
-    border-radius:18px;
-    background:#18a84a;
+    border-radius:17px;
+    background:#18ad4b;
     color:white;
-    font-size:17px;
+    font-size:16px;
     font-weight:900;
-    z-index:25;
-    box-shadow:0 5px 12px rgba(0,0,0,.3);
+    z-index:20;
     display:none;
 }
 
-/* MENU */
+#speed{
+    position:fixed;
+    top:70px;
+    right:12px;
+    background:#111c;
+    color:white;
+    padding:8px 12px;
+    border-radius:10px;
+    font-weight:bold;
+    z-index:10;
+    display:none;
+}
+
 #menu{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.72);
-    z-index:100;
+    background:#000b;
     display:none;
     align-items:center;
     justify-content:center;
+    z-index:100;
 }
 
 .menuBox{
-    width:min(340px,88vw);
-    background:#1d1d1d;
-    border-radius:22px;
+    width:300px;
     padding:22px;
-    box-shadow:0 15px 40px rgba(0,0,0,.5);
-    color:white;
+    border-radius:22px;
+    background:#202420;
 }
 
 .menuTitle{
+    color:white;
     text-align:center;
-    font-size:26px;
+    font-size:25px;
     font-weight:900;
-    margin-bottom:20px;
+    margin-bottom:15px;
 }
 
-.menuBtn{
+.menuButton{
     width:100%;
-    height:55px;
-    margin-top:10px;
+    height:52px;
+    margin-top:9px;
     border:0;
-    border-radius:14px;
-    background:#333;
+    border-radius:13px;
+    background:#383d38;
     color:white;
-    font-size:18px;
+    font-size:17px;
     font-weight:bold;
 }
 
-.menuBtn:hover{
-    background:#444;
+#close{
+    background:#b92f2f;
 }
 
-#closeMenu{
-    background:#b82e2e;
-}
-
-/* SPEED */
-#speed{
-    position:fixed;
-    right:18px;
-    top:70px;
-    z-index:20;
-    color:white;
-    background:rgba(0,0,0,.65);
-    padding:7px 12px;
-    border-radius:10px;
-    font-weight:bold;
-    display:none;
-}
-
-/* MESSAGE */
-#message{
+#msg{
     position:fixed;
     left:50%;
-    top:75%;
+    top:70%;
     transform:translate(-50%,-50%);
+    background:#000c;
     color:white;
-    background:rgba(0,0,0,.75);
-    padding:12px 20px;
+    padding:12px 18px;
     border-radius:12px;
     font-weight:bold;
     opacity:0;
-    transition:.25s;
     z-index:200;
-    pointer-events:none;
+    transition:.2s;
 }
 
-/* MOBILE */
 @media(max-width:700px){
-    #topbar{
-        height:48px;
-        padding:0 10px;
-    }
-
-    .logo{
-        font-size:16px;
-    }
-
-    .stats{
-        gap:5px;
-        font-size:11px;
-    }
-
-    .stat{
-        padding:5px 6px;
-    }
-
-    #mButton{
-        top:58px;
-        left:10px;
-        width:50px;
-        height:50px;
-    }
-
+    #top{height:50px}
+    #logo{font-size:16px}
+    .stat{font-size:11px;padding:6px}
+    #m{top:62px;width:52px;height:52px}
     #joystick{
         width:125px;
         height:125px;
         left:15px;
-        bottom:15px;
+        bottom:14px;
     }
-
     #stick{
-        width:60px;
-        height:60px;
+        width:58px;
+        height:58px;
     }
-
-    #buttons{
+    #controls{
         right:12px;
-        bottom:15px;
-        gap:8px;
+        bottom:14px;
     }
-
-    .control{
-        width:95px;
+    .ctrl{
+        width:100px;
         height:55px;
-        font-size:15px;
     }
-
-    #enterCar{
+    #enter{
         right:12px;
-        bottom:15px;
-        width:115px;
-        height:55px;
-        font-size:15px;
-    }
-
-    #speed{
-        top:58px;
-        right:10px;
+        bottom:14px;
     }
 }
 </style>
@@ -312,8 +259,8 @@ html,body{
 
 <canvas id="game"></canvas>
 
-<div id="topbar">
-    <div class="logo">🇺🇿 UZBEK RP</div>
+<div id="top">
+    <div id="logo">🇺🇿 UZBEK RP</div>
 
     <div class="stats">
         <div class="stat">💰 <span id="money">500000</span> so‘m</div>
@@ -321,7 +268,7 @@ html,body{
     </div>
 </div>
 
-<button id="mButton">M</button>
+<button id="m">M</button>
 
 <div id="speed">0 km/h</div>
 
@@ -329,41 +276,26 @@ html,body{
     <div id="stick"></div>
 </div>
 
-<div id="buttons">
-    <button id="exitCar" class="control">TUSHISH</button>
-    <button id="gas" class="control">GAZ</button>
-    <button id="brake" class="control">TORMOZ</button>
+<div id="controls">
+    <button id="exit" class="ctrl">TUSHISH</button>
+    <button id="gas" class="ctrl">GAZ</button>
+    <button id="brake" class="ctrl">TORMOZ</button>
 </div>
 
-<button id="enterCar">O‘TIRISH</button>
+<button id="enter">O‘TIRISH</button>
 
-<div id="message"></div>
+<div id="msg"></div>
 
 <div id="menu">
     <div class="menuBox">
-
         <div class="menuTitle">🇺🇿 UZBEK RP</div>
-
-        <button class="menuBtn" id="mapBtn">
-            🗺️ XARITA
-        </button>
-
-        <button class="menuBtn" id="settingsBtn">
-            ⚙️ SOZLAMALAR
-        </button>
-
-        <button class="menuBtn" id="closeMenu">
-            ❌ YOPISH
-        </button>
-
+        <button class="menuButton">🗺️ XARITA</button>
+        <button class="menuButton">⚙️ SOZLAMALAR</button>
+        <button id="close" class="menuButton">❌ YOPISH</button>
     </div>
 </div>
 
 <script>
-/* =========================================================
-   UZBEK RP
-   YANGI MASHINA BOSHQARUVI
-   ========================================================= */
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -372,694 +304,65 @@ let W = 0;
 let H = 0;
 
 function resize(){
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
+    W = window.innerWidth;
+    H = window.innerHeight;
+
+    canvas.width = W;
+    canvas.height = H;
 }
 
-window.addEventListener("resize", resize);
+window.addEventListener("resize",resize);
 resize();
 
-/* =========================================================
-   O'YIN HOLATI
-   ========================================================= */
+/* =========================
+   DUNYO
+========================= */
 
-let money = 500000;
-let fuel = 97;
-
-let inCar = false;
-
-let player = {
-    x: 850,
-    y: 430,
-    angle: 0
-};
+const WORLD_W = 3000;
+const WORLD_H = 2200;
 
 let car = {
-    x: 790,
-    y: 430,
-
-    /*
-      0 = tepaga qaragan
-      PI/2 = o'ng
-    */
-    angle: Math.PI / 2,
-
-    speed: 0,
-
-    maxSpeed: 8,
-    reverseSpeed: 3,
-
-    acceleration: 0.18,
-    brakePower: 0.32,
-
-    steering: 0
+    x:1500,
+    y:1100,
+    angle:0,
+    speed:0
 };
 
-/* =========================================================
+let player = {
+    x:1570,
+    y:1100,
+    angle:0
+};
+
+let inCar = false;
+let fuel = 97;
+let money = 500000;
+
+/* =========================
    JOYSTICK
-   ========================================================= */
+========================= */
 
 const joystick = document.getElementById("joystick");
 const stick = document.getElementById("stick");
 
-let joyActive = false;
 let joyX = 0;
 let joyY = 0;
+let touching = false;
 
-function joystickCenter(){
+function moveStick(x,y){
 
     const r = joystick.getBoundingClientRect();
 
-    return {
-        x:r.left + r.width/2,
-        y:r.top + r.height/2
-    };
-}
+    let dx = x - (r.left+r.width/2);
+    let dy = y - (r.top+r.height/2);
 
-function updateJoystick(clientX,clientY){
+    const max = 45;
 
-    const c = joystickCenter();
-
-    let dx = clientX - c.x;
-    let dy = clientY - c.y;
-
-    const max = 48;
-
-    const len = Math.sqrt(dx*dx + dy*dy);
+    let len = Math.sqrt(dx*dx+dy*dy);
 
     if(len > max){
-        dx = dx / len * max;
-        dy = dy / len * max;
+        dx = dx/len*max;
+        dy = dy/len*max;
     }
 
-    joyX = dx / max;
-    joyY = dy / max;
-
-    stick.style.left = `calc(50% + ${dx}px)`;
-    stick.style.top = `calc(50% + ${dy}px)`;
-}
-
-function resetJoystick(){
-
-    joyActive = false;
-    joyX = 0;
-    joyY = 0;
-
-    stick.style.left = "50%";
-    stick.style.top = "50%";
-}
-
-joystick.addEventListener("pointerdown",e=>{
-    joyActive = true;
-    joystick.setPointerCapture(e.pointerId);
-    updateJoystick(e.clientX,e.clientY);
-});
-
-joystick.addEventListener("pointermove",e=>{
-    if(joyActive){
-        updateJoystick(e.clientX,e.clientY);
-    }
-});
-
-joystick.addEventListener("pointerup",resetJoystick);
-joystick.addEventListener("pointercancel",resetJoystick);
-
-/* =========================================================
-   GAZ / TORMOZ
-   ========================================================= */
-
-let gasPressed = false;
-let brakePressed = false;
-
-const gas = document.getElementById("gas");
-const brake = document.getElementById("brake");
-
-function pressStart(e){
-    e.preventDefault();
-    gasPressed = true;
-}
-
-function pressEnd(e){
-    e.preventDefault();
-    gasPressed = false;
-}
-
-gas.addEventListener("pointerdown",pressStart);
-gas.addEventListener("pointerup",pressEnd);
-gas.addEventListener("pointercancel",pressEnd);
-gas.addEventListener("pointerleave",pressEnd);
-
-function brakeStart(e){
-    e.preventDefault();
-    brakePressed = true;
-}
-
-function brakeEnd(e){
-    e.preventDefault();
-    brakePressed = false;
-}
-
-brake.addEventListener("pointerdown",brakeStart);
-brake.addEventListener("pointerup",brakeEnd);
-brake.addEventListener("pointercancel",brakeEnd);
-brake.addEventListener("pointerleave",brakeEnd);
-
-/* =========================================================
-   MASHINAGA O'TIRISH / TUSHISH
-   ========================================================= */
-
-const enterCar = document.getElementById("enterCar");
-const exitCar = document.getElementById("exitCar");
-
-enterCar.addEventListener("click",()=>{
-
-    inCar = true;
-
-    player.x = car.x;
-    player.y = car.y;
-
-    enterCar.style.display = "none";
-    exitCar.style.display = "block";
-    gas.style.display = "block";
-    brake.style.display = "block";
-    document.getElementById("speed").style.display = "block";
-
-    showMessage("🚗 Mashinaga o'tirdingiz");
-});
-
-exitCar.addEventListener("click",()=>{
-
-    if(Math.abs(car.speed) > 0.5){
-        showMessage("Avval mashinani to'xtating!");
-        return;
-    }
-
-    inCar = false;
-
-    player.x = car.x + Math.cos(car.angle) * 60;
-    player.y = car.y + Math.sin(car.angle) * 60;
-
-    exitCar.style.display = "none";
-    gas.style.display = "none";
-    brake.style.display = "none";
-    document.getElementById("speed").style.display = "none";
-
-    enterCar.style.display = "none";
-
-    showMessage("🚶 Mashinadan tushdingiz");
-});
-
-/* =========================================================
-   MASHINA FIZIKASI
-   ========================================================= */
-
-function updateCar(){
-
-    /*
-       JOYSTICK = RUL
-
-       chap  -> chapga buriladi
-       o'ng  -> o'ngga buriladi
-
-       Yuqoriga/pastga bosish tezlik bermaydi.
-    */
-
-    let steer = joyX;
-
-    /*
-       Burilish faqat mashina harakatlanayotganda.
-    */
-
-    if(Math.abs(car.speed) > 0.05){
-
-        const steeringPower = 0.045;
-
-        car.angle += steer * steeringPower *
-                      Math.min(Math.abs(car.speed)/3,1) *
-                      (car.speed >= 0 ? 1 : -1);
-    }
-
-    /* GAZ */
-
-    if(gasPressed && fuel > 0){
-
-        if(car.speed < 0){
-
-            car.speed += car.brakePower;
-
-            if(car.speed > 0){
-                car.speed = 0;
-            }
-
-        }else{
-
-            car.speed += car.acceleration;
-
-            if(car.speed > car.maxSpeed){
-                car.speed = car.maxSpeed;
-            }
-
-        }
-
-        fuel -= 0.002;
-    }
-
-    /*
-       TORMOZ:
-
-       oldinga ketayotgan bo'lsa:
-       avval to'xtaydi.
-
-       0 ga kelgandan keyin:
-       tormozni ushlab turilsa orqaga yuradi.
-    */
-
-    else if(brakePressed){
-
-        if(car.speed > 0){
-
-            car.speed -= car.brakePower;
-
-            if(car.speed < 0){
-                car.speed = 0;
-            }
-
-        }else{
-
-            car.speed -= 0.10;
-
-            if(car.speed < -car.reverseSpeed){
-                car.speed = -car.reverseSpeed;
-            }
-
-            fuel -= 0.001;
-        }
-    }
-
-    /*
-       Gaz ham, tormoz ham bosilmasa
-       mashina sekin to'xtaydi.
-    */
-
-    else{
-
-        if(car.speed > 0){
-            car.speed -= 0.055;
-
-            if(car.speed < 0){
-                car.speed = 0;
-            }
-        }
-
-        if(car.speed < 0){
-            car.speed += 0.055;
-
-            if(car.speed > 0){
-                car.speed = 0;
-            }
-        }
-    }
-
-    /*
-       HARAKAT
-
-       angle:
-       0 = tepaga
-       PI/2 = o'ng
-    */
-
-    car.x += Math.sin(car.angle) * car.speed;
-    car.y -= Math.cos(car.angle) * car.speed;
-
-    /* xarita chegarasi */
-
-    const margin = 70;
-
-    car.x = Math.max(margin,Math.min(WORLD_W-margin,car.x));
-    car.y = Math.max(margin,Math.min(WORLD_H-margin,car.y));
-
-    /* player mashina bilan birga */
-
-    player.x = car.x;
-    player.y = car.y;
-
-    document.getElementById("fuel").textContent =
-        Math.max(0,Math.floor(fuel));
-
-    const kmh = Math.round(Math.abs(car.speed)*12);
-
-    document.getElementById("speed").textContent =
-        kmh + " km/h";
-}
-
-/* =========================================================
-   PIYODA
-   ========================================================= */
-
-function updatePlayer(){
-
-    if(inCar) return;
-
-    const walkSpeed = 3.2;
-
-    player.x += joyX * walkSpeed;
-    player.y += joyY * walkSpeed;
-
-    if(Math.abs(joyX)+Math.abs(joyY)>0.1){
-
-        player.angle = Math.atan2(joyX,-joyY);
-    }
-
-    player.x = Math.max(30,Math.min(WORLD_W-30,player.x));
-    player.y = Math.max(30,Math.min(WORLD_H-30,player.y));
-}
-
-/* =========================================================
-   DUNYO
-   ========================================================= */
-
-const WORLD_W = 2600;
-const WORLD_H = 1800;
-
-/* =========================================================
-   CHIZISH
-   ========================================================= */
-
-function draw(){
-
-    ctx.clearRect(0,0,W,H);
-
-    let cameraX;
-    let cameraY;
-
-    if(inCar){
-
-        cameraX = car.x - W/2;
-        cameraY = car.y - H/2;
-
-    }else{
-
-        cameraX = player.x - W/2;
-        cameraY = player.y - H/2;
-    }
-
-    cameraX = Math.max(0,Math.min(WORLD_W-W,cameraX));
-    cameraY = Math.max(0,Math.min(WORLD_H-H,cameraY));
-
-    ctx.save();
-
-    ctx.translate(-cameraX,-cameraY);
-
-    drawWorld();
-
-    if(!inCar){
-        drawPlayer(player.x,player.y,player.angle);
-        drawCar(car.x,car.y,car.angle);
-    }else{
-        drawCar(car.x,car.y,car.angle);
-    }
-
-    ctx.restore();
-}
-
-/* =========================================================
-   YER / SHAHAR
-   ========================================================= */
-
-function drawWorld(){
-
-    /* yashil yer */
-
-    ctx.fillStyle = "#6fa04f";
-    ctx.fillRect(0,0,WORLD_W,WORLD_H);
-
-    /* mayda tekstura */
-
-    for(let x=0;x<WORLD_W;x+=80){
-
-        for(let y=0;y<WORLD_H;y+=80){
-
-            ctx.fillStyle =
-                ((x+y)/80)%2===0
-                ? "rgba(255,255,255,.025)"
-                : "rgba(0,0,0,.025)";
-
-            ctx.fillRect(x,y,80,80);
-        }
-    }
-
-    /* ASOSIY YO'L */
-
-    drawRoad(0,500,WORLD_W,230);
-
-    /* ikkinchi yo'l */
-
-    drawRoad(1250,0,240,WORLD_H);
-
-    /* mahalla yo'li */
-
-    drawRoad(300,1100,1700,140);
-
-    /* kichik yo'l */
-
-    drawRoad(1900,250,120,950);
-
-    /* yo'l chiziqlari */
-
-    drawRoadLines(0,500,WORLD_W,230,true);
-    drawRoadLines(1250,0,240,WORLD_H,false);
-    drawRoadLines(300,1100,1700,140,true);
-    drawRoadLines(1900,250,120,950,false);
-
-    /* trotuarlar */
-
-    drawSidewalk(0,475,WORLD_W,25);
-    drawSidewalk(0,730,WORLD_W,25);
-
-    drawSidewalk(1225,0,25,WORLD_H);
-    drawSidewalk(1490,0,25,WORLD_H);
-
-    /* binolar */
-
-    drawBuilding(120,120,330,280,"BANK");
-    drawBuilding(560,120,300,250,"DO'KON");
-    drawBuilding(940,100,240,300,"KAFE");
-
-    drawBuilding(1650,90,400,270,"SHIFOXONA");
-    drawBuilding(2150,100,320,300,"POLITSIYA");
-
-    drawBuilding(80,820,350,220,"OFIS");
-    drawBuilding(540,820,330,220,"MAHALLA");
-
-    drawBuilding(1620,820,330,240,"AVTOSALON");
-    drawBuilding(2050,820,390,260,"SERVIS");
-
-    drawBuilding(100,1300,360,260,"UY");
-    drawBuilding(600,1300,350,260,"UY");
-    drawBuilding(1050,1350,350,230,"UY");
-
-    /* APARTMENT */
-
-    drawApartment(1600,1250);
-
-    /* qurilish */
-
-    drawConstruction(2100,1300);
-
-    /* beton zavod */
-
-    drawFactory(450,300);
-
-    /* gaz zapravkalar */
-
-    drawGasStation(1000,650);
-    drawGasStation(1750,650);
-    drawGasStation(2250,520);
-    drawGasStation(1050,1550);
-
-    /* daraxtlar */
-
-    for(let i=0;i<40;i++){
-
-        const x = 50 + (i*193)%2450;
-        const y = 50 + (i*317)%1650;
-
-        if(
-            x>1200 && x<1520 ||
-            y>480 && y<760 ||
-            y>1080 && y<1260
-        ) continue;
-
-        drawTree(x,y);
-    }
-}
-
-/* =========================================================
-   ROAD
-   ========================================================= */
-
-function drawRoad(x,y,w,h){
-
-    ctx.fillStyle="#c2b89e";
-    ctx.fillRect(x-12,y-12,w+24,h+24);
-
-    ctx.fillStyle="#33383c";
-    ctx.fillRect(x,y,w,h);
-}
-
-function drawRoadLines(x,y,w,h,horizontal){
-
-    ctx.save();
-
-    ctx.strokeStyle="#e8d98b";
-    ctx.lineWidth=5;
-    ctx.setLineDash([35,28]);
-
-    ctx.beginPath();
-
-    if(horizontal){
-
-        ctx.moveTo(x,y+h/2);
-        ctx.lineTo(x+w,y+h/2);
-
-    }else{
-
-        ctx.moveTo(x+w/2,y);
-        ctx.lineTo(x+w/2,y+h);
-    }
-
-    ctx.stroke();
-
-    ctx.restore();
-}
-
-function drawSidewalk(x,y,w,h){
-
-    ctx.fillStyle="#aaa49a";
-    ctx.fillRect(x,y,w,h);
-
-    ctx.strokeStyle="#858078";
-    ctx.lineWidth=2;
-
-    for(let i=x;i<x+w;i+=25){
-        ctx.beginPath();
-        ctx.moveTo(i,y);
-        ctx.lineTo(i,y+h);
-        ctx.stroke();
-    }
-}
-
-/* =========================================================
-   BINO
-   ========================================================= */
-
-function drawBuilding(x,y,w,h,name){
-
-    ctx.save();
-
-    /* shadow */
-
-    ctx.fillStyle="rgba(0,0,0,.25)";
-    ctx.fillRect(x+12,y+12,w,h);
-
-    /* body */
-
-    const grad=ctx.createLinearGradient(x,y,x+w,y+h);
-
-    grad.addColorStop(0,"#d7c5a6");
-    grad.addColorStop(1,"#aa9476");
-
-    ctx.fillStyle=grad;
-    ctx.fillRect(x,y,w,h);
-
-    /* roof */
-
-    ctx.fillStyle="#51473c";
-    ctx.fillRect(x-5,y-15,w+10,18);
-
-    /* windows */
-
-    const cols=Math.max(2,Math.floor(w/65));
-    const rows=Math.max(2,Math.floor(h/65));
-
-    for(let a=0;a<cols;a++){
-
-        for(let b=0;b<rows;b++){
-
-            const wx=x+20+a*60;
-            const wy=y+30+b*55;
-
-            if(wx+28>x+w || wy+32>y+h) continue;
-
-            ctx.fillStyle="#263b4a";
-            ctx.fillRect(wx,wy,30,34);
-
-            ctx.strokeStyle="#d5c39d";
-            ctx.strokeRect(wx,wy,30,34);
-
-            ctx.strokeStyle="rgba(255,255,255,.3)";
-            ctx.beginPath();
-            ctx.moveTo(wx+15,wy);
-            ctx.lineTo(wx+15,wy+34);
-            ctx.stroke();
-        }
-    }
-
-    /* door */
-
-    ctx.fillStyle="#513a29";
-    ctx.fillRect(x+w/2-22,y+h-70,44,70);
-
-    /* yozuv */
-
-    ctx.fillStyle="white";
-    ctx.font="bold 18px Arial";
-    ctx.textAlign="center";
-    ctx.fillText(name,x+w/2,y+h-82);
-
-    ctx.restore();
-}
-
-/* =========================================================
-   APARTMENT
-   ========================================================= */
-
-function drawApartment(x,y){
-
-    const w=500;
-    const h=400;
-
-    ctx.fillStyle="rgba(0,0,0,.25)";
-    ctx.fillRect(x+15,y+15,w,h);
-
-    ctx.fillStyle="#b9b0a4";
-    ctx.fillRect(x,y,w,h);
-
-    ctx.fillStyle="#77716a";
-    ctx.fillRect(x-10,y-15,w+20,20);
-
-    for(let row=0;row<5;row++){
-
-        for(let col=0;col<6;col++){
-
-            const wx=x+30+col*76;
-            const wy=y+35+row*68;
-
-            ctx.fillStyle="#273e50";
-            ctx.fillRect(wx,wy,48,38);
-
-            ctx.strokeStyle="#eee";
-            ctx.strokeRect(wx,wy,48,38);
-        }
-    }
-
-    ctx.fillStyle="#513a29";
-    ctx.fillRect(x+w/2-35,y+h-90,70,90);
-
-    ctx.fillStyle="white";
-    ctx.font="bold 22px Arial";
-    ctx.textAlign="center";
-    ctx.fillText("KO‘P QAVATLI UY",x+w/2,y-25);
-}
-
-/* ============================
+    joyX
